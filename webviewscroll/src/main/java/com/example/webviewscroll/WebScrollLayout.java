@@ -17,6 +17,7 @@ public class WebScrollLayout extends LinearLayout {
     private ScrollWebView mDispatchWebView;
     float y1 = 0;
     float y2 = 0;
+    public RecyclerviewScrollBottom recyclerviewScrollBottomListener;
     private boolean isIntercept = false;
     boolean isScrollUp = true;
     private RecyclerView recyclerView;
@@ -26,6 +27,8 @@ public class WebScrollLayout extends LinearLayout {
         if (getChildAt(0) != null) {
             recyclerView = (RecyclerView) getChildAt(0);
             recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                boolean isSlidingToLast = false;
+
                 @Override
                 public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                     LinearLayoutManager manager = (LinearLayoutManager) recyclerView.getLayoutManager();
@@ -35,11 +38,30 @@ public class WebScrollLayout extends LinearLayout {
                     } else {
                         onScrollTop(false);
                     }
+                    if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                        int count = recyclerView.getAdapter().getItemCount();
+                        //获取最后一个完全显示的ItemPosition
+                        int lastVisibleItem = manager.findLastCompletelyVisibleItemPosition();
+                        int totalItemCount = manager.getItemCount();
+
+                        // 判断是否滚动到底部，并且是向右滚动
+                        if (lastVisibleItem == (totalItemCount - 1) && isSlidingToLast) {
+                            recyclerviewScrollBottomListener.onScrollBottom();
+                        }
+                    }
                 }
 
                 @Override
                 public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                     super.onScrolled(recyclerView, dx, dy);
+                    //dx用来判断横向滑动方向，dy用来判断纵向滑动方向
+                    if (dy > 0) {
+                        //大于0表示，正在向右滚动
+                        isSlidingToLast = true;
+                    } else {
+                        //小于等于0 表示停止或向左滚动
+                        isSlidingToLast = false;
+                    }
 
 
                 }
@@ -158,5 +180,14 @@ public class WebScrollLayout extends LinearLayout {
             }
         }
     }
+    public void setRecyclerviewScrollBottomListener(RecyclerviewScrollBottom recyclerviewScrollBottomListener) {
 
+        this.recyclerviewScrollBottomListener = recyclerviewScrollBottomListener;
+
+    }
+    public interface RecyclerviewScrollBottom {
+
+        public void onScrollBottom();
+
+    }
 }

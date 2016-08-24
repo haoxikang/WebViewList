@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.example.webviewscroll.WebScrollLayout;
 import com.example.webviewscroll.WebViewAdapter;
@@ -21,6 +22,12 @@ private RecyclerView recyclerView;
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         WebViewAdapter webViewAdapter = new WebViewAdapter(new MyAdapter(),"http://wap.4c.cn");
+        webScrollLayout.setRecyclerviewScrollBottomListener(new WebScrollLayout.RecyclerviewScrollBottom() {
+            @Override
+            public void onScrollBottom() {
+                Log.d("测试","滑动到底部");
+            }
+        });
         webViewAdapter.attchLayout(webScrollLayout);
         recyclerView.setAdapter(webViewAdapter);
 

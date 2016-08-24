@@ -15,8 +15,9 @@ import android.webkit.WebView;
 public class ScrollWebView extends WebView {
     boolean mIgnoreTouchCancel;
     public ScrollInterface mScrollInterface;
-    private boolean isScroll=true;
+    private boolean isScroll = true;
     private int maxH;
+
     public ScrollWebView(Context context) {
         super(context);
     }
@@ -33,9 +34,11 @@ public class ScrollWebView extends WebView {
     public ScrollWebView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
-    public void ignoreTouchCancel (boolean val) {
+
+    public void ignoreTouchCancel(boolean val) {
         mIgnoreTouchCancel = val;
     }
+
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
         int action = ev.getAction();
@@ -50,20 +53,23 @@ public class ScrollWebView extends WebView {
     protected void onScrollChanged(int l, int t, int oldl, int oldt) {
 
         super.onScrollChanged(l, t, oldl, oldt);
-        mScrollInterface.onSChanged(l, t, oldl, oldt);
+        if (mScrollInterface!=null){
+            mScrollInterface.onSChanged(l, t, oldl, oldt);
+
+        }
 
     }
 
     @Override
     protected void onSizeChanged(int w, int h, int ow, int oh) {
-        if (h>maxH){
+        if (h > maxH) {
             ViewGroup.LayoutParams layoutParams = getLayoutParams();
-            layoutParams.height=maxH;
+            layoutParams.height = maxH;
             setLayoutParams(layoutParams);
-            isScroll=true;
+            isScroll = true;
         }
-        if (h<maxH){
-            isScroll=false;
+        if (h < maxH) {
+            isScroll = false;
         }
         super.onSizeChanged(w, h, ow, oh);
     }
@@ -79,9 +85,10 @@ public class ScrollWebView extends WebView {
         public void onSChanged(int l, int t, int oldl, int oldt);
 
     }
-public void setMaxH(int h){
-    maxH=h;
-}
+
+    public void setMaxH(int h) {
+        maxH = h;
+    }
 
     public boolean isScroll() {
         return isScroll;
