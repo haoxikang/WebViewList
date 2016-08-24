@@ -18,6 +18,15 @@ public class WebViewAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHol
     private int TPYE_WEB_VIEW=10;
     private RecyclerView.Adapter mInnerAdapter;
     private WebScrollLayout layout;
+
+    public RecyclerView.Adapter getmInnerAdapter() {
+        return mInnerAdapter;
+    }
+
+    public void setmInnerAdapter(RecyclerView.Adapter mInnerAdapter) {
+        this.mInnerAdapter = mInnerAdapter;
+    }
+
     public WebViewAdapter(RecyclerView.Adapter adapter, String url)
     {
         mInnerAdapter = adapter;
