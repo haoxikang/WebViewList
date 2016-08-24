@@ -6,6 +6,7 @@
     android:id="@+id/webview"
     android:fadingEdge="none"
     android:overScrollMode="never"
+    android:scrollbars="none"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"></com.example.webviewscroll.ScrollWebView>
 </FrameLayout>
