@@ -17,19 +17,9 @@ Step 2. Add the dependency
 	}
 	使用方法：
 	第一步：在xml中：
-	<com.example.webviewscroll.WebScrollLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/my_layout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.administrator.webviewlist.MainActivity">
-<android.support.v7.widget.RecyclerView
-    android:id="@+id/recycler"
-    android:fadingEdge="none"
-    android:overScrollMode="never"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
-</com.example.webviewscroll.WebScrollLayout>
+	用 WebScrollLayout 包裹 RecyclerView 代替 RecyclerView
+
+    
 第二步：在activity中：
    
     private RecyclerView recyclerView;
