@@ -77,9 +77,9 @@ public class WebScrollLayout extends LinearLayout {
                 @Override
                 public void onSChanged(int l, int t, int oldl, int oldt) {
                     float webViewContentHeight = mDispatchWebView.getContentHeight() * mDispatchWebView.getScale();
-                    Log.d("内容高度",mDispatchWebView.getContentHeight()+"");
+                    Log.d("内容高度",webViewContentHeight+"");
                     float webViewCurrentHeight = (mDispatchWebView.getHeight() + mDispatchWebView.getScrollY());
-                    Log.d("偏移量+页面高度",mDispatchWebView.getContentHeight()+"");
+                    Log.d("偏移量+页面高度",webViewCurrentHeight+"");
                     if ((webViewContentHeight - webViewCurrentHeight) == 0) {
                         System.out.println("WebView滑动到了底端");
                         if (isScrollUp && mDispatchWebView.isScroll()) {
