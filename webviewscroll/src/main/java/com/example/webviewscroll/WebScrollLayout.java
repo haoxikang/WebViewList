@@ -36,6 +36,7 @@ public class WebScrollLayout extends LinearLayout {
                         Log.d("TAG", "滑动到顶部");
                         onScrollTop(true);
                     } else {
+                        Log.d("TAG", "滑动到不是顶部");
                         onScrollTop(false);
                     }
                     if (newState == RecyclerView.SCROLL_STATE_IDLE) {
@@ -76,8 +77,9 @@ public class WebScrollLayout extends LinearLayout {
                 @Override
                 public void onSChanged(int l, int t, int oldl, int oldt) {
                     float webViewContentHeight = mDispatchWebView.getContentHeight() * mDispatchWebView.getScale();
-                    Log.d("高度",mDispatchWebView.getContentHeight()+"");
+                    Log.d("内容高度",mDispatchWebView.getContentHeight()+"");
                     float webViewCurrentHeight = (mDispatchWebView.getHeight() + mDispatchWebView.getScrollY());
+                    Log.d("偏移量+页面高度",mDispatchWebView.getContentHeight()+"");
                     if ((webViewContentHeight - webViewCurrentHeight) == 0) {
                         System.out.println("WebView滑动到了底端");
                         if (isScrollUp && mDispatchWebView.isScroll()) {
@@ -165,12 +167,15 @@ public class WebScrollLayout extends LinearLayout {
     }
 
     private void onScrollTop(boolean istop) {  //recyclerview是否滑动到顶部的时候
+        Log.d("TAG","进入onscrolltop");
         if (mDispatchWebView != null) {
 
             if (!isScrollUp && istop && mDispatchWebView.isScroll()) {
+                Log.d("TAG","进入onscrolltop的if");
                 mDispatchWebView.ignoreTouchCancel(true);
                 isIntercept = true;
             }else if (mDispatchWebView!=null){
+                Log.d("TAG","进入onscrolltop的else");
                 mDispatchWebView.ignoreTouchCancel(false);
                 isIntercept = false;
             }
@@ -183,7 +188,7 @@ public class WebScrollLayout extends LinearLayout {
     }
     public interface RecyclerviewScrollBottom {
 
-        public void onScrollBottom();
+         void onScrollBottom();
 
     }
 }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
 import android.webkit.WebView;
@@ -62,6 +63,7 @@ public class ScrollWebView extends WebView {
 
     @Override
     protected void onSizeChanged(int w, int h, int ow, int oh) {
+            Log.d("onSizeChanged","h="+h);
         if (h > maxH) {
             ViewGroup.LayoutParams layoutParams = getLayoutParams();
             layoutParams.height = maxH;
@@ -87,6 +89,7 @@ public class ScrollWebView extends WebView {
     }
 
     public void setMaxH(int h) {
+        Log.d("maxH=",h+"");
         maxH = h;
     }
 

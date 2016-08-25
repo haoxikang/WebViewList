@@ -44,6 +44,7 @@ public void attachLayout(WebScrollLayout layout){
         if (viewType==TPYE_WEB_VIEW)
         {
             WebViewHolder holder = new WebViewHolder(scrollWebView);
+
             holder.webView.setMaxH(parent.getHeight());
             layout.preventParentTouchEvent(holder.webView);
             return holder;
