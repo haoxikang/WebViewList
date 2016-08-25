@@ -71,6 +71,7 @@ public class WebScrollLayout extends LinearLayout {
 
         mDispatchWebView = (ScrollWebView) view;
         if (mDispatchWebView != null) {
+
             isIntercept = true;
             mDispatchWebView.setOnCustomScroolChangeListener(new ScrollWebView.ScrollInterface() {
                 @Override
@@ -177,6 +178,9 @@ public class WebScrollLayout extends LinearLayout {
             if (!isScrollUp && istop && mDispatchWebView.isScroll()) {
                 mDispatchWebView.ignoreTouchCancel(true);
                 isIntercept = true;
+            }else {
+                mDispatchWebView.ignoreTouchCancel(false);
+                isIntercept = false;
             }
         }
     }

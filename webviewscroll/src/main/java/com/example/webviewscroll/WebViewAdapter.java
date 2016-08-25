@@ -18,7 +18,7 @@ public class WebViewAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHol
     private int TPYE_WEB_VIEW=10;
     private RecyclerView.Adapter mInnerAdapter;
     private WebScrollLayout layout;
-
+private ScrollWebView scrollWebView;
     public RecyclerView.Adapter getmInnerAdapter() {
         return mInnerAdapter;
     }
@@ -33,17 +33,19 @@ public class WebViewAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHol
         this.url = url;
 
     }
-public void attchLayout(WebScrollLayout layout){
+
+public void attachLayout(WebScrollLayout layout){
     this.layout=layout;
 }
+    public void attachWebView(ScrollWebView webView){
+        scrollWebView = webView;
+    }
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
         if (viewType==TPYE_WEB_VIEW)
         {
-            WebViewHolder holder = new WebViewHolder(LayoutInflater.from(
-                    parent.getContext()).inflate(R.layout.view_web, parent,
-                    false));
+            WebViewHolder holder = new WebViewHolder(scrollWebView);
             holder.webView.setMaxH(parent.getHeight());
             layout.preventParentTouchEvent(holder.webView);
             return holder;
@@ -118,13 +120,10 @@ public void attchLayout(WebScrollLayout layout){
         ScrollWebView webView ;
         public WebViewHolder(View itemView) {
             super(itemView);
-            webView =(ScrollWebView) itemView.findViewById(R.id.webview);
-            initWebView(webView);
+            webView =(ScrollWebView) itemView;
         }
     }
 
-    private void initWebView(WebView webView) {
-        webView.loadUrl(url);
-    }
+
 
 }
