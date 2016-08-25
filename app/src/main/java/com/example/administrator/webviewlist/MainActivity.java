@@ -27,8 +27,8 @@ private RecyclerView recyclerView;
 
         webScrollLayout = (WebScrollLayout)findViewById(R.id.my_layout);
         recyclerView = (RecyclerView)findViewById(R.id.recycler);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        WebViewAdapter webViewAdapter = new WebViewAdapter(new MyAdapter());
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));;
+        WebViewAdapter webViewAdapter = new WebViewAdapter(new MyAdapter(),"http://wap.4c.cn");
         webScrollLayout.setRecyclerviewScrollBottomListener(new WebScrollLayout.RecyclerviewScrollBottom() {
             @Override
             public void onScrollBottom() {
@@ -36,9 +36,6 @@ private RecyclerView recyclerView;
             }
         });
         webViewAdapter.attachLayout(webScrollLayout);
-        final ScrollWebView scrollWebView = new ScrollWebView(this);
-        scrollWebView.loadUrl("http://wap.4c.cn");
-        webViewAdapter.attachWebView(scrollWebView);
         recyclerView.setAdapter(webViewAdapter);
 button.setOnClickListener(new View.OnClickListener() {
     @Override
