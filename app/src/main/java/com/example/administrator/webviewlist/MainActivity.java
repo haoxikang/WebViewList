@@ -24,6 +24,7 @@ private RecyclerView recyclerView;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         button = (Button)findViewById(R.id.button) ;
+
         webScrollLayout = (WebScrollLayout)findViewById(R.id.my_layout);
         recyclerView = (RecyclerView)findViewById(R.id.recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
