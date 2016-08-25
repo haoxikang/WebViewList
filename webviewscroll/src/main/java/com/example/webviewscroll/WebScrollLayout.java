@@ -39,7 +39,6 @@ public class WebScrollLayout extends LinearLayout {
                         onScrollTop(false);
                     }
                     if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                        int count = recyclerView.getAdapter().getItemCount();
                         //获取最后一个完全显示的ItemPosition
                         int lastVisibleItem = manager.findLastCompletelyVisibleItemPosition();
                         int totalItemCount = manager.getItemCount();
@@ -77,7 +76,7 @@ public class WebScrollLayout extends LinearLayout {
                 @Override
                 public void onSChanged(int l, int t, int oldl, int oldt) {
                     float webViewContentHeight = mDispatchWebView.getContentHeight() * mDispatchWebView.getScale();
-                    //WebView的现高度
+                    Log.d("高度",mDispatchWebView.getContentHeight()+"");
                     float webViewCurrentHeight = (mDispatchWebView.getHeight() + mDispatchWebView.getScrollY());
                     if ((webViewContentHeight - webViewCurrentHeight) == 0) {
                         System.out.println("WebView滑动到了底端");
@@ -106,16 +105,9 @@ public class WebScrollLayout extends LinearLayout {
 
     }
 
-    //手势事件拦截判断
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        /**
-         * 当在页面某节点的touchstart事件里调用preventHostViewTouchMove时
-         * 此时拦截后续的TouchMove事件给mDispatchWebView
-         * 但在这之前mDispatchWebView会收到一个Touch Cancel消息
-         * 这时应该让mDispatchWebView暂时忽略这个Cancel事件（在TouchUp后恢复）
-         * 避免打断页面DOM节点绑定的事件处理流程而导致节点不跟手或不响应
-         * */
+
         if (ev.getAction() == MotionEvent.ACTION_MOVE && isIntercept) {
             {
                 if (mDispatchWebView.isScroll()) {
@@ -178,7 +170,7 @@ public class WebScrollLayout extends LinearLayout {
             if (!isScrollUp && istop && mDispatchWebView.isScroll()) {
                 mDispatchWebView.ignoreTouchCancel(true);
                 isIntercept = true;
-            }else {
+            }else if (mDispatchWebView!=null){
                 mDispatchWebView.ignoreTouchCancel(false);
                 isIntercept = false;
             }

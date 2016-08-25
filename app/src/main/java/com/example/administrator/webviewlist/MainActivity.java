@@ -28,7 +28,7 @@ private RecyclerView recyclerView;
         webScrollLayout = (WebScrollLayout)findViewById(R.id.my_layout);
         recyclerView = (RecyclerView)findViewById(R.id.recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        WebViewAdapter webViewAdapter = new WebViewAdapter(new MyAdapter(),"http://wap.4c.cn");
+        WebViewAdapter webViewAdapter = new WebViewAdapter(new MyAdapter());
         webScrollLayout.setRecyclerviewScrollBottomListener(new WebScrollLayout.RecyclerviewScrollBottom() {
             @Override
             public void onScrollBottom() {
@@ -37,15 +37,6 @@ private RecyclerView recyclerView;
         });
         webViewAdapter.attachLayout(webScrollLayout);
         final ScrollWebView scrollWebView = new ScrollWebView(this);
-        scrollWebView.setWebViewClient(new WebViewClient(){
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                super.onPageFinished(view, url);
-
-               boolean s= scrollWebView.pageDown(true);
-                Log.d("加载完毕",s+"");
-            }
-        });
         scrollWebView.loadUrl("http://wap.4c.cn");
         webViewAdapter.attachWebView(scrollWebView);
         recyclerView.setAdapter(webViewAdapter);

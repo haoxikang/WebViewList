@@ -14,7 +14,6 @@ import android.webkit.WebView;
 public class WebViewAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 {
 
-    private String url = "";
     private int TPYE_WEB_VIEW=10;
     private RecyclerView.Adapter mInnerAdapter;
     private WebScrollLayout layout;
@@ -27,10 +26,9 @@ private ScrollWebView scrollWebView;
         this.mInnerAdapter = mInnerAdapter;
     }
 
-    public WebViewAdapter(RecyclerView.Adapter adapter, String url)
+    public WebViewAdapter(RecyclerView.Adapter adapter)
     {
         mInnerAdapter = adapter;
-        this.url = url;
 
     }
 

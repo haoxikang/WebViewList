@@ -82,7 +82,7 @@ public class ScrollWebView extends WebView {
 
     public interface ScrollInterface {
 
-        public void onSChanged(int l, int t, int oldl, int oldt);
+         void onSChanged(int l, int t, int oldl, int oldt);
 
     }
 
