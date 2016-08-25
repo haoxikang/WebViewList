@@ -76,11 +76,11 @@ public class WebScrollLayout extends LinearLayout {
             mDispatchWebView.setOnCustomScroolChangeListener(new ScrollWebView.ScrollInterface() {
                 @Override
                 public void onSChanged(int l, int t, int oldl, int oldt) {
-                    float webViewContentHeight = mDispatchWebView.getContentHeight() * mDispatchWebView.getScale();
+                    float webViewContentHeight = mDispatchWebView.getContentHeight() * mDispatchWebView.getScrollY();
                     Log.d("内容高度",webViewContentHeight+"");
                     float webViewCurrentHeight = (mDispatchWebView.getHeight() + mDispatchWebView.getScrollY());
                     Log.d("偏移量+页面高度",webViewCurrentHeight+"");
-                    if ((webViewContentHeight - webViewCurrentHeight) == 0) {
+                    if ((webViewContentHeight - webViewCurrentHeight) <= 5) {
                         System.out.println("WebView滑动到了底端");
                         if (isScrollUp && mDispatchWebView.isScroll()) {
                             mDispatchWebView.ignoreTouchCancel(false);
