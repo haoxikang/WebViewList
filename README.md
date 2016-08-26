@@ -16,12 +16,17 @@ Step 2. Add the dependency
 	dependencies {
 	        compile 'com.github.348476129:WebViewList:0.1.2'
 	}
-	使用方法：
-	第一步：在xml中：
-	用 WebScrollLayout 包裹 RecyclerView 代替 RecyclerView
+	
 
-    
-第二步：在activity中：
+使用方法：
+
+第一步：
+
+用 WebScrollLayout 包裹 RecyclerView 代替 RecyclerView
+
+第二步：
+
+在activity中：
    
     private RecyclerView recyclerView;
     private WebScrollLayout webScrollLayout;
