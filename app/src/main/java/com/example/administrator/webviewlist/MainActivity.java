@@ -27,8 +27,8 @@ private RecyclerView recyclerView;
 
         webScrollLayout = (WebScrollLayout)findViewById(R.id.my_layout);
         recyclerView = (RecyclerView)findViewById(R.id.recycler);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));;
-        WebViewAdapter webViewAdapter = new WebViewAdapter(new MyAdapter(),"http://wap.4c.cn");
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        WebViewAdapter webViewAdapter = new WebViewAdapter(new MyAdapter(),"https://app.4c.cn/web/details?nid=234&systemType=android&phoneName=E6683&phoneCode=33e129936a25fb1ac94f351e2fea6076");
         webScrollLayout.setRecyclerviewScrollBottomListener(new WebScrollLayout.RecyclerviewScrollBottom() {
             @Override
             public void onScrollBottom() {

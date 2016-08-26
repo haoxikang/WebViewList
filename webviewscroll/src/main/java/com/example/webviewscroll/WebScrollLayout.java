@@ -125,7 +125,10 @@ public class WebScrollLayout extends LinearLayout {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        Log.d("Log", mDispatchWebView.getHeight() + "");
+        if (mDispatchWebView!=null){
+            Log.d("Log", mDispatchWebView.getHeight() + "");
+        }
+
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 y1 = ev.getY();

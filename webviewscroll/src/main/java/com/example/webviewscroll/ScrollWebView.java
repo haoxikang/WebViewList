@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 /**
  * Created by 康颢曦 on 2016/8/23.
@@ -20,16 +21,17 @@ public class ScrollWebView extends WebView {
     private int maxH;
 
     public ScrollWebView(Context context) {
-        super(context);
+        this(context,null);
     }
 
     public ScrollWebView(Context context, AttributeSet attrs) {
-        super(context, attrs);
+        this(context,attrs,0);
     }
 
     public ScrollWebView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
+
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public ScrollWebView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
@@ -62,19 +64,46 @@ public class ScrollWebView extends WebView {
     }
 
     @Override
-    protected void onSizeChanged(int w, int h, int ow, int oh) {
-            Log.d("onSizeChanged","h="+h);
-        if (h > maxH) {
-            ViewGroup.LayoutParams layoutParams = getLayoutParams();
-            layoutParams.height = maxH;
-            setLayoutParams(layoutParams);
-            isScroll = true;
-        }
-        if (h < maxH) {
-            isScroll = false;
-        }
-        super.onSizeChanged(w, h, ow, oh);
+    public void postInvalidate() {
+        Log.d("TAG","内容高度,调用post");
+        super.postInvalidate();
     }
+
+    @Override
+    public void invalidate() {
+
+        if (maxH!=0){
+            int h = (int) (getContentHeight()*getScale());
+            Log.d("TAG","内容高度"+h);
+            if (h>=maxH){
+                ViewGroup.LayoutParams layoutParams = getLayoutParams();
+                layoutParams.height = maxH;
+                setLayoutParams(layoutParams);
+                isScroll = true;
+            }else {
+                ViewGroup.LayoutParams layoutParams = getLayoutParams();
+                layoutParams.height = h;
+                setLayoutParams(layoutParams);
+                isScroll = false;
+            }
+        }
+        super.invalidate();
+    }
+
+//    @Override
+//    protected void onSizeChanged(int w, int h, int ow, int oh) {
+//            Log.d("onSizeChanged","h="+h);
+//        if (h > maxH) {
+//            ViewGroup.LayoutParams layoutParams = getLayoutParams();
+//            layoutParams.height = maxH;
+//            setLayoutParams(layoutParams);
+//            isScroll = true;
+//        }
+//        if (h < maxH) {
+//            isScroll = false;
+//        }
+//        super.onSizeChanged(w, h, ow, oh);
+//    }
 
     public void setOnCustomScroolChangeListener(ScrollInterface scrollInterface) {
 

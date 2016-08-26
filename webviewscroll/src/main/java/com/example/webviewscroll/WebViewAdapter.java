@@ -45,6 +45,10 @@ public void attachLayout(WebScrollLayout layout){
                         parent.getContext()).inflate(R.layout.view_web, parent,
                         false));
                 holder.webView.setMaxH(parent.getHeight());
+                Log.d("Log"," "+holder.webView.getContentHeight());
+//                ViewGroup.LayoutParams layoutParams =holder.webView. getLayoutParams();
+//                layoutParams.height = parent.getHeight();
+//                holder.webView. setLayoutParams(layoutParams);
                 layout.preventParentTouchEvent(holder.webView);
                 return holder;
 
