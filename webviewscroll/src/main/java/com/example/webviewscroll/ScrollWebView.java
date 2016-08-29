@@ -44,6 +44,7 @@ public class ScrollWebView extends WebView {
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
+
         int action = ev.getAction();
         if (action == MotionEvent.ACTION_DOWN) {
             onScrollChanged(getScrollX(), getScrollY(), getScrollX(), getScrollY());

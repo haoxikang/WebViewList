@@ -14,22 +14,14 @@ import android.webkit.WebView;
 
 public class WebViewAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 {
-    private String url = "";
     private int TPYE_WEB_VIEW=10;
     private RecyclerView.Adapter mInnerAdapter;
     private WebScrollLayout layout;
-    public RecyclerView.Adapter getmInnerAdapter() {
-        return mInnerAdapter;
-    }
-
-    public void setmInnerAdapter(RecyclerView.Adapter mInnerAdapter) {
-        this.mInnerAdapter = mInnerAdapter;
-    }
-
-    public WebViewAdapter(RecyclerView.Adapter adapter, String url)
+    private ScrollWebView scrollWebView;
+    public WebViewAdapter(RecyclerView.Adapter adapter ,ScrollWebView scrollWebView)
     {
+        this.scrollWebView = scrollWebView;
         mInnerAdapter = adapter;
-        this.url = url;
 
     }
 
@@ -41,14 +33,11 @@ public void attachLayout(WebScrollLayout layout){
     {
             if (viewType==TPYE_WEB_VIEW)
             {
-                WebViewHolder holder = new WebViewHolder(LayoutInflater.from(
-                        parent.getContext()).inflate(R.layout.view_web, parent,
-                        false));
+                WebViewHolder holder = new WebViewHolder(scrollWebView);
                 holder.webView.setMaxH(parent.getHeight());
                 Log.d("Log"," "+holder.webView.getContentHeight());
-//                ViewGroup.LayoutParams layoutParams =holder.webView. getLayoutParams();
-//                layoutParams.height = parent.getHeight();
-//                holder.webView. setLayoutParams(layoutParams);
+                ViewGroup.LayoutParams layoutParams =new  ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                holder.webView. setLayoutParams(layoutParams);
                 layout.preventParentTouchEvent(holder.webView);
                 return holder;
 
@@ -122,13 +111,10 @@ public void attachLayout(WebScrollLayout layout){
         ScrollWebView webView ;
         public WebViewHolder(View itemView) {
             super(itemView);
-            webView =(ScrollWebView) itemView.findViewById(R.id.webview);
-            initWebView(webView);
+            webView =(ScrollWebView)itemView;
         }
     }
-    private void initWebView(WebView webView) {
-        webView.loadUrl(url);
-    }
+
 
 
 }
