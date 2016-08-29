@@ -40,9 +40,9 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (scrollWebView.isShown()) {
+                    recyclerView.scrollToPosition(0);
                     scrollWebView.scrollTo(0, 0);
-                }
+
 
                 //    recyclerView.smoothScrollToPosition(20);
             }

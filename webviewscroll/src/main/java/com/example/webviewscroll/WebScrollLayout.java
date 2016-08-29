@@ -76,6 +76,7 @@ public class WebScrollLayout extends LinearLayout {
             mDispatchWebView.setOnCustomScroolChangeListener(new ScrollWebView.ScrollInterface() {
                 @Override
                 public void onSChanged(int l, int t, int oldl, int oldt) {
+                    Log.d("调用滑动事件",l+" "+t+" "+oldl+" "+oldt);
                     float webViewContentHeight = mDispatchWebView.getContentHeight() * mDispatchWebView.getScale();
                     Log.d("内容高度",webViewContentHeight+"");
                     float webViewCurrentHeight = (mDispatchWebView.getHeight() + mDispatchWebView.getScrollY());
@@ -87,6 +88,12 @@ public class WebScrollLayout extends LinearLayout {
                             isIntercept = false;
                         }
 
+                    }else {
+                        System.out.println("WebView滑动到了不是底端");
+                        if (isScrollUp && mDispatchWebView.isScroll()) {
+                            mDispatchWebView.ignoreTouchCancel(true);
+                            isIntercept = true;
+                        }
                     }
                 }
             });
