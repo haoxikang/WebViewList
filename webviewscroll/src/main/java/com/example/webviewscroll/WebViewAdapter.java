@@ -18,7 +18,16 @@ public class WebViewAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHol
     private RecyclerView.Adapter mInnerAdapter;
     private WebScrollLayout layout;
     private ScrollWebView scrollWebView;
-    public WebViewAdapter(RecyclerView.Adapter adapter ,ScrollWebView scrollWebView)
+
+    public RecyclerView.Adapter getmInnerAdapter() {
+        return mInnerAdapter;
+    }
+
+    public void setmInnerAdapter(RecyclerView.Adapter mInnerAdapter) {
+        this.mInnerAdapter = mInnerAdapter;
+    }
+
+    public WebViewAdapter(RecyclerView.Adapter adapter , ScrollWebView scrollWebView)
     {
         this.scrollWebView = scrollWebView;
         mInnerAdapter = adapter;
