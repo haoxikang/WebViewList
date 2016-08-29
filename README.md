@@ -14,7 +14,7 @@ Add it in your root build.gradle at the end of repositories:
 Step 2. Add the dependency
 
 	dependencies {
-	        compile 'com.github.348476129:WebViewList:1.0.0'
+	        compile 'com.github.348476129:WebViewList:1.1.0'
 	}
 	
 
@@ -35,7 +35,9 @@ Step 2. Add the dependency
       webScrollLayout = (WebScrollLayout)findViewById(R.id.my_layout);
         recyclerView = (RecyclerView)findViewById(R.id.recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        WebViewAdapter webViewAdapter = new WebViewAdapter(new MyAdapter(),"http://wap.4c.cn");
+          ScrollWebView scrollWebView = new ScrollWebView(this);
+        scrollWebView.loadUrl(url);
+        WebViewAdapter webViewAdapter = new WebViewAdapter(new MyAdapter(),scrollWebView);
         webScrollLayout.setRecyclerviewScrollBottomListener(new WebScrollLayout.RecyclerviewScrollBottom() {
             @Override
             public void onScrollBottom() {
