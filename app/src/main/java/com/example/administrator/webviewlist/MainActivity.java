@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         final ScrollWebView scrollWebView = new ScrollWebView(this);
-        scrollWebView.loadUrl("https://app.4c.cn/web/details?nid=244&systemType=android&phoneName=E6683&phoneCode=33e129936a25fb1ac94f351e2fea6076");
+        scrollWebView.loadUrl("http://wap.4c.cn");
         WebViewAdapter webViewAdapter = new WebViewAdapter(new MyAdapter(), scrollWebView);
         webScrollLayout.setRecyclerviewScrollBottomListener(new WebScrollLayout.RecyclerviewScrollBottom() {
             @Override
@@ -40,11 +40,8 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    recyclerView.scrollToPosition(0);
-                    scrollWebView.scrollTo(0, 0);
+                webScrollLayout.scrollTop();
 
-
-                //    recyclerView.smoothScrollToPosition(20);
             }
         });
     }

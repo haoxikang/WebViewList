@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.ViewConfiguration;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
 
@@ -90,10 +91,6 @@ public class WebScrollLayout extends LinearLayout {
 
                     }else {
                         System.out.println("WebView滑动到了不是底端");
-                        if (isScrollUp && mDispatchWebView.isScroll()) {
-                            mDispatchWebView.ignoreTouchCancel(true);
-                            isIntercept = true;
-                        }
                     }
                 }
             });
@@ -144,11 +141,12 @@ public class WebScrollLayout extends LinearLayout {
             case MotionEvent.ACTION_MOVE:
 
                 y2 = ev.getY();
-                if (y1 - y2 > 50) {
-                    isScrollUp = true;
+                if (y1 - y2 >ViewConfiguration.get(getContext()).getScaledTouchSlop()) {
+                        isScrollUp = true;
 
                 }
-                if (y2 - y1 > 50) {
+                if (y2 - y1 > ViewConfiguration.get(getContext()).getScaledTouchSlop()) {
+
                     isScrollUp = false;
 
                 }
@@ -200,5 +198,25 @@ public class WebScrollLayout extends LinearLayout {
 
          void onScrollBottom();
 
+    }
+    public void scrollTop(){
+        if (recyclerView!=null&&mDispatchWebView!=null){
+            recyclerView.scrollToPosition(0);
+            mDispatchWebView.scrollTo(0, 0);
+            if (mDispatchWebView.isScroll()){
+                mDispatchWebView.ignoreTouchCancel(true);
+                isIntercept = true;
+            }
+        }
+
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        Log.d("销毁","销毁");
+        super.onDetachedFromWindow();
+        mDispatchWebView.destroy();
+        mDispatchWebView=null;
+        recyclerView=null;
     }
 }
