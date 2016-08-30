@@ -204,6 +204,8 @@ public class WebScrollLayout extends LinearLayout {
             recyclerView.scrollToPosition(0);
             mDispatchWebView.scrollTo(0, 0);
             if (mDispatchWebView.isScroll()){
+
+                Log.d("TAG","滑动到顶部，获取触摸事件");
                 mDispatchWebView.ignoreTouchCancel(true);
                 isIntercept = true;
             }
