@@ -201,6 +201,7 @@ public class WebScrollLayout extends LinearLayout {
     }
     public void scrollTop(){
         if (recyclerView!=null&&mDispatchWebView!=null){
+            Log.d("TAG","滑动到顶部，进入第一层");
             recyclerView.scrollToPosition(0);
             mDispatchWebView.scrollTo(0, 0);
             if (mDispatchWebView.isScroll()){
