@@ -218,8 +218,11 @@ public class WebScrollLayout extends LinearLayout {
     protected void onDetachedFromWindow() {
         Log.d("销毁","销毁");
         super.onDetachedFromWindow();
-        mDispatchWebView.destroy();
-        mDispatchWebView=null;
+        if (mDispatchWebView!=null){
+            mDispatchWebView.destroy();
+            mDispatchWebView=null;
+        }
+
         recyclerView=null;
     }
 }
