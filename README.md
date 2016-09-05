@@ -1,5 +1,4 @@
 # WebViewList
-[![](https://jitpack.io/v/348476129/WebViewList.svg)](https://jitpack.io/#348476129/WebViewList)
 ![image](https://github.com/348476129/WebViewList/blob/master/gif5新文件.gif)
 解决了 Webview+RecyclerView的滑动冲突。能让两个控件协同滑动。
 如何导入：
