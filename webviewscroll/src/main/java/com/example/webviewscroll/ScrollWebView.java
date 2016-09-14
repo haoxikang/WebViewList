@@ -78,8 +78,11 @@ public class ScrollWebView extends WebView {
             Log.d("TAG","内容高度"+h);
             if (h>=maxH){
                 ViewGroup.LayoutParams layoutParams = getLayoutParams();
-                layoutParams.height = maxH;
-                setLayoutParams(layoutParams);
+                if (layoutParams.height!=maxH){
+                    layoutParams.height = maxH;
+                    setLayoutParams(layoutParams);
+
+                }
                 isScroll = true;
             }else {
                 ViewGroup.LayoutParams layoutParams = getLayoutParams();

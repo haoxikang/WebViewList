@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 
 import com.example.webviewscroll.ScrollWebView;
@@ -27,16 +29,23 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         final ScrollWebView scrollWebView = new ScrollWebView(this);
+        scrollWebView.setWebViewClient(new WebViewClient(){
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                WebViewAdapter webViewAdapter = new WebViewAdapter(new MyAdapter(), scrollWebView);
+                webViewAdapter.attachLayout(webScrollLayout);
+                recyclerView.setAdapter(webViewAdapter);
+            }
+        });
         scrollWebView.loadUrl("http://wap.4c.cn");
-        WebViewAdapter webViewAdapter = new WebViewAdapter(new MyAdapter(), scrollWebView);
+
         webScrollLayout.setRecyclerviewScrollBottomListener(new WebScrollLayout.RecyclerviewScrollBottom() {
             @Override
             public void onScrollBottom() {
                 //滑动到了底部监听
             }
         });
-        webViewAdapter.attachLayout(webScrollLayout);
-        recyclerView.setAdapter(webViewAdapter);
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
